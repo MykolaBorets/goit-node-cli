@@ -28,9 +28,10 @@ export const removeContact = async (contactId) => {
     return null;
   }
 
-  const deletedContact = data.splice(index, 1);
+  const deletedContact = data.slice(index, index + 1)[0];
+  data.splice(index, 1);
 
-  await fs.writeFile(contactsPath, JSON.stringify(data));
+  await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
   return deletedContact;
 };
 
